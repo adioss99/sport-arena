@@ -22,6 +22,9 @@ class HomeController extends Controller
     public function detail(string $slug): View
     {
         $schedule = Location::with([
+            'fields' => function ($q) {
+                $q->whereHas('pivot');
+            },
             'fields:id,name,number,location_id,field_type_id',
             'fields.fieldType:id,detail,price_per_hour',
             'fields.pivot:id,schedule_id,field_id',
@@ -52,7 +55,7 @@ class HomeController extends Controller
                 ];
             })->toArray(),
         ];
-        // dd($data);
+
         return view('arena-detail', ['arenas' => $data['location'], 'schedules' => $data]);
     }
 }
