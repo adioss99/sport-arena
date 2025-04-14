@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Location extends Model
 {
-    protected $fillable = ['name', 'regency', 'district', 'slug'];
+    protected $fillable = ['name', 'regency', 'district', 'slug', 'detail_address', 'gmaps'];
     public static function boot()
     {
         parent::boot();

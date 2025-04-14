@@ -24,7 +24,7 @@ class aside extends Component
             'admin' => [
                 ['name' => 'Dasboard', 'icon' => 'fa-chart-line', 'url' => 'admin.dashboard'],
                 ['name' => 'Field', 'icon' => 'fa-futbol', 'url' => 'admin.field'],
-                ['name' => 'Schedule', 'icon' => 'fa-calendar-week', 'url' => 'admin.schedule'],
+                ['name' => 'Field Schedule', 'icon' => 'fa-calendar-week', 'url' => 'admin.schedule'],
             ],
             'user' => [
                 ['name' => 'User', 'icon' => 'fa-chart-line', 'url' => 'dashboard'],

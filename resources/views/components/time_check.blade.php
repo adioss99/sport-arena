@@ -20,30 +20,18 @@
             value="{{ $schedule['pivot_id'] }}"
             type="checkbox"
             class="checkBox before:content[''] peer relative size-4 appearance-none overflow-hidden rounded-sm bg-surface before:absolute before:inset-0 checked:before:bg-primary focus:outline-outline-strong checked:focus:outline-primary active:outline-offset-0 disabled:cursor-not-allowed"
-        />
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            stroke="currentColor"
-            fill="none"
-            stroke-width="4"
-            class="pointer-events-none invisible absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 text-on-primary peer-checked:visible dark:text-on-primary-dark"
-        >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
+            hidden
             />
-        </svg>
     </span>
 </label>
 @else
 <label
     for="disabled"
-    class="inline-flex border border-slate-200 justify-between rounded-lg bg-surface-alt px-1 w-full py-2 text-sm font-medium text-on-surface has-disabled:opacity-50 has-disabled:cursor-not-allowed"
+    class="inline-flex border border-slate-200 justify-between rounded-lg bg-surface-alt px-1 w-full py-2 text-sm font-medium text-on-surface has-disabled:opacity-30 has-disabled:cursor-not-allowed"
 >
-    <span class="m-auto"> booked </span>
+    <span class="m-auto"
+        >{{ $schedule["start_time"] }} - {{ $schedule["end_time"] }}</span
+    >
     <input type="checkbox" disabled id="disabled" class="hidden" />
 </label>
 @endif
