@@ -1,6 +1,10 @@
-<div x-data="{modalIsOpen: false}">
+@props([
+    'modalId' => '1', 'action' => '#', 'btnClass' => '', 'btnTitle' => '',
+    'modalTitle' => '', 'confirmYes' => 'Confirm',
+])
+<div x-data="{modal{{ $modalId }}: false}">
     <button
-        x-on:click="modalIsOpen = true"
+        x-on:click="modal{{ $modalId }} = true"
         type="button"
         class="{{ $btnClass }}"
     >
@@ -8,11 +12,10 @@
     </button>
     <div
         x-cloak
-        x-show="modalIsOpen"
-        x-transition.opacity.duration.200ms
-        x-trap.inert.noscroll="modalIsOpen"
-        x-on:keydown.esc.window="modalIsOpen = false"
-        x-on:click.self="modalIsOpen = false"
+        x-show="modal{{ $modalId }}"
+        x-transition.opacity.duration.200ms 
+        x-on:keydown.esc.window="modal{{ $modalId }} = false"
+        x-on:click.self="modal{{ $modalId }} = false"
         class="fixed inset-0 z-30 flex items-end justify-center bg-black/20 p-4 pb-8 backdrop-blur-md sm:items-center lg:p-8"
         role="dialog"
         aria-modal="true"
@@ -20,7 +23,7 @@
     >
         <!-- Modal Dialog -->
         <div
-            x-show="modalIsOpen"
+            x-show="modal{{ $modalId }}"
             x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity"
             x-transition:enter-start="opacity-0 scale-50"
             x-transition:enter-end="opacity-100 scale-100"
@@ -37,7 +40,7 @@
                     {{ $modalTitle }}
                 </h3>
                 <button
-                    x-on:click="modalIsOpen = false"
+                    x-on:click="modal{{ $modalId }} = false"
                     aria-label="close modal"
                 >
                     <svg
@@ -68,14 +71,14 @@
                     class="flex flex-col justify-between gap-2 bg-surface-alt/60 p-4 20 sm:flex-row sm:items-center md:justify-end"
                 >
                     <button
-                        x-on:click="modalIsOpen = false"
+                        x-on:click="modal{{ $modalId }} = false"
                         type="button"
                         class="rounded-lg outline-1 outline-red-500 text-md font-semibold text-red-500 w-full py-2 hover:bg-red-400 hover:text-white"
                     >
                         Cancel
                     </button>
                     <button
-                        x-on:click="modalIsOpen = false"
+                        x-on:click="modal{{ $modalId }} = false"
                         type="submit"
                         class="rounded-lg outline-1 outline-green-500 text-md font-semibold text-green-500 w-full py-2 hover:bg-green-400 hover:text-white"
                     >

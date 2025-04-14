@@ -35,7 +35,7 @@
                     </a>
                 </div>
                 <span class="col-span-2 mt-2 ">
-                    <x-modal>
+                    <x-modal modalId="345">
                         <x-slot:action>
                             {{ route("admin.location.update") }}
                         </x-slot:action>
@@ -95,7 +95,7 @@
             <label class="m-autotext-md font-semibold text-black-600"
                 >Fields</label
             >
-            <x-modal>
+            <x-modal modalId="1">
                 <x-slot:action>
                     {{ route("admin.field.create") }}
                 </x-slot:action>
@@ -173,7 +173,7 @@
                             @currency($arena->fieldType->price_per_hour)
                         </td>
                         <td class="p-4 gap-2 flex justify-center">
-                            <x-modal>
+                            <x-modal modalId="2">
                                 <x-slot:action>
                                     {{ route('admin.field.update', $arena->id) }}
                                 </x-slot:action>
@@ -251,7 +251,7 @@
                                     </div>
                                 </span>
                             </x-modal>
-                            <x-modal>
+                            <x-modal modalId="3">
                                 @method("DELETE")
                                 <x-slot:action>
                                     {{ route('admin.field.delete', $arena->id) }}
@@ -289,7 +289,7 @@
             <label class="text-md font-semibold text-black-600"
                 >Field Type</label
             >
-            <x-modal>
+            <x-modal modalId="4">
                 <x-slot:action>
                     {{ route("admin.type.create") }}
                 </x-slot:action>
@@ -345,7 +345,7 @@
                         <td class="p-4">{{ $type->detail }}</td>
                         <td class="p-4">@currency($type->price_per_hour)</td>
                         <td class="p-4 gap-2 flex justify-center">
-                            <x-modal>
+                            <x-modal modalId="5">
                                 <x-slot:action>
                                     {{ route('admin.type.update', $type->id) }}
                                 </x-slot:action>
@@ -374,7 +374,7 @@
                                     />
                                 </span>
                             </x-modal>
-                            <x-modal>
+                            <x-modal modalId="6">
                                 @method("DELETE")
                                 <x-slot:action>
                                     {{ route('admin.type.delete', $type->id) }}

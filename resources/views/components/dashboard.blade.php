@@ -109,8 +109,7 @@
                         x-on:click.outside="userDropdownIsOpen = false"
                         x-on:keydown.down.prevent="$focus.wrap().next()"
                         x-on:keydown.up.prevent="$focus.wrap().previous()"
-                        x-transition=""
-                        x-trap="userDropdownIsOpen"
+                        x-transition="" 
                     >
                         <div class="flex flex-col py-1.5">
                             <a

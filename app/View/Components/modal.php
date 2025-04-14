@@ -19,10 +19,6 @@ class modal extends Component
     /**
      * Get the view / contents that represent the component.
      */
-    public $action = '';
-    public $modalTitle = '';
-    public $btnTitle = '';
-    public $btnClass = '';
 
     public function render(): View|Closure|string
     {
