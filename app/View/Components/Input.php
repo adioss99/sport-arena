@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class modal extends Component
+class Input extends Component
 {
     /**
      * Create a new component instance.
@@ -19,13 +19,8 @@ class modal extends Component
     /**
      * Get the view / contents that represent the component.
      */
-    public $action = '';
-    public $modalTitle = '';
-    public $btnTitle = '';
-    public $btnClass = '';
-
     public function render(): View|Closure|string
     {
-        return view('components.modal');
+        return view('components.input');
     }
 }
