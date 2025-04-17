@@ -18,9 +18,10 @@ class BookingDateSearch extends Component
             'bookingFields:id,booking_id',
             'bookingFields.bookingTimes:id,schedule_pivot_id,booking_field_id'
         ])
+            ->where('status', '!=', 'cancel')
             ->where('location_id', $this->location_id)
             ->whereDate('boking_date', $this->date)
-            ->select('id',  'location_id')
+            ->select('id',  'location_id', 'status', 'boking_date')
             ->get()
             ->flatMap(function ($booking) {
                 return $booking->bookingFields->flatMap(function ($field) {
@@ -43,7 +44,7 @@ class BookingDateSearch extends Component
     }
     public function mount(string $location_id)
     {
-        $this->date = now()->format('Y-m-d');
+        $this->date = session('dt') ?? now()->format('Y-m-d');
         $this->location_id = $location_id;
         $this->findBooking();
     }

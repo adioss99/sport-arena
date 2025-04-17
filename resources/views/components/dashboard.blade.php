@@ -18,7 +18,7 @@
 
         <nav
             x-cloak
-            class="fixed left-0 z-30 flex h-svh w-60 shrink-0 flex-col bg-slate-100 p-4 transition-transform duration-300 md:w-64 md:translate-x-0 md:relative"
+            class="fixed left-0 z-30 flex h-svh w-48 shrink-0 flex-col bg-slate-100 p-4 transition-transform duration-300 md:w-48 md:translate-x-0 md:relative"
             x-bind:class="sidebarIsOpen ? 'translate-x-0' : '-translate-x-60'"
             aria-label="sidebar navigation"
         >

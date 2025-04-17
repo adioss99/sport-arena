@@ -19,7 +19,7 @@ class AdminFieldController extends Controller
     public function __construct()
     {
         $this->owner = Auth::user()->id;
-        $this->locationId = Location::where('owner_id', Auth::user()->id)->first()->id;
+        $this->locationId = Auth::user()->location->id;
     }
 
     public function page(): View

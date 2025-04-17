@@ -167,7 +167,7 @@ class BookingController extends Controller
 
             DB::commit();
             Alert::success('Booking successful!', 'Your booking has been successfully created.');
-            return back();
+            return back()->with('dt', $date);
         } catch (\Exception $e) {
             DB::rollBack();
             Alert::error('Booking failed!', 'An error occurred while processing your booking. Please try again.' . $e->getMessage());

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,5 +34,10 @@ class Location extends Model
     public function fields(): HasMany
     {
         return $this->hasMany(Field::class);
+    }
+
+    public function owner(): BelongsTo
+    { 
+        return $this->belongsTo(User::class);
     }
 }

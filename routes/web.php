@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\AdminFieldController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardAdminController;
@@ -49,11 +50,13 @@ Route::prefix('admin')->middleware(['auth:admin'])->name('admin.')->group(functi
         Route::delete('/field/{id}/delete', 'delete')->name('field.delete');
         Route::post('/field/create', 'create')->name('field.create');
         // field type
-        Route::post('/type/{id}/update', 'updateFieldType')->name('type.update');    
-        Route::delete('/type/{id}/delete', 'deleteFieldType')->name('type.delete');    
+        Route::post('/type/{id}/update', 'updateFieldType')->name('type.update');
+        Route::delete('/type/{id}/delete', 'deleteFieldType')->name('type.delete');
         Route::post('/type/create', 'typeCreate')->name('type.create');
         Route::get('/schedule', 'schedule')->name('schedule');
     });
+    Route::get('/booking/{status?}', [AdminBookingController::class, 'page'])
+        ->where('status', 'pending|cancel|success|expired')->name('booking');
 });
 
 Route::prefix('')->middleware(['auth:user'])->group(function () {
