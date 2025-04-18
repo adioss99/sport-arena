@@ -29,15 +29,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
-        Schema::table('fields', function (Blueprint $table) {
-            $table->dropForeign(['field_type_id', 'location_id']);
-            $table->dropColumn(['number', 'field_type_id', 'location_id']);
-        });
-        Schema::table('field_types', function (Blueprint $table) {
-            $table->dropColumn('location_id');
-        });
+        // Schema::table('locations', function (Blueprint $table) {
+        //     $table->dropColumn('slug');
+        // });
+        // Schema::table('fields', function (Blueprint $table) {
+        //     $table->dropForeign(['field_type_id', 'location_id']);
+        //     $table->dropColumn(['number', 'field_type_id', 'location_id']);
+        // });
+        // Schema::table('field_types', function (Blueprint $table) {
+        //     $table->dropColumn('location_id');
+        // });
     }
 };

@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn('field_id');
-            $table->string('location_name')->after('booking_code');
-            $table->foreignId('booking_id')->constrained()->onDelete('cascade')->after('booking_date');
+            $table->integer('field_id');
+            $table->string('location_name')->after('booking_code'); 
         });
         Schema::table('booking_times', function (Blueprint $table) {
             $table->foreignId('booking_field_id')->constrained()->onDelete('cascade');
@@ -27,17 +26,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        // Schema::table('bookings', function (Blueprint $table) {
             // $table->integer('field_id');
-            $table->dropColumn('location_name')->after('location_id');
-            $table->dropColumn('booking_id');
-        });
-        Schema::table(
-            'booking_times',
-            function (Blueprint $table) {
-                $table->dropColumn('booking_field_id');
-                $table->dropColumn('schedule_pivot_id');
-            }
-        );
+            // $table->dropColumn('location_name'); 
+        // });
+        // Schema::table('booking_times',function (Blueprint $table) {
+        //         $table->dropColumn('booking_field_id');
+        //         $table->dropColumn('schedule_pivot_id');
+        //     }
+        // );
     }
 };
