@@ -121,17 +121,18 @@ final class AdminBookingTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Status', 'status')
+                ->sortable()
+                ->searchable(),
+
+            Column::action('Action'),
+
             Column::make('Created at', 'created_at_formatted', 'created_at')
                 ->sortable(),
 
             Column::make('Updated at', 'updated_at_formatted', 'updated_at')
                 ->sortable(),
 
-            Column::make('Status', 'status')
-                ->sortable()
-                ->searchable(),
-
-            Column::action('Action')
         ];
     }
 
@@ -173,7 +174,9 @@ final class AdminBookingTable extends PowerGridComponent
             'status' => 'required|in:success,cancel,pending',
         ]);
         $data = Booking::where('id', $id)->first();
-        $data->update(['status' => $status]);
+        if($data && $data->status !== $status && $val->passes() && $this->status !== 'expired' && $data->status !== 'cancel') {
+            $data->update(['status' => $status]);
+        }
     }
 
     public function actionRules($row): array
@@ -181,7 +184,7 @@ final class AdminBookingTable extends PowerGridComponent
 
         return [
             Rule::button('pending')
-                ->when(fn($row) => $row->status == 'pending' || $this->status == 'expired')
+                ->when(fn($row) => $row-> status === 'cancel' || $row->status == 'pending' || $this->status == 'expired')
                 ->hide(),
 
             Rule::button('cancel')
@@ -189,7 +192,7 @@ final class AdminBookingTable extends PowerGridComponent
                 ->hide(),
 
             Rule::button('success')
-                ->when(fn($row) => $row->status == 'success' || $this->status == 'expired')
+                ->when(fn($row) => $row-> status === 'cancel' || $row->status == 'success' || $this->status == 'expired')
                 ->hide(),
         ];
     }
