@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('name'); // Add a unique slug column
-        });
-        Schema::table('fields', function (Blueprint $table) {
-            $table->integer('number');
-            $table->foreignId('field_type_id')->constrained('field_types')->onDelete('cascade')->after('name');
-            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade')->after('name');
-        });
-        Schema::table('field_types', function (Blueprint $table) {
-            $table->integer('location_id');
-        });
+        // Schema::table('locations', function (Blueprint $table) {
+        //     $table->string('slug')->unique()->after('name'); // Add a unique slug column
+        // });
+        // Schema::table('fields', function (Blueprint $table) {
+        //     $table->integer('number');
+        //     $table->foreignId('field_type_id')->constrained('field_types')->onDelete('cascade')->after('name');
+        //     $table->foreignId('location_id')->constrained('locations')->onDelete('cascade')->after('name');
+        // });
+        // Schema::table('field_types', function (Blueprint $table) {
+        //     $table->integer('location_id');
+        // });
     }
 
     /**

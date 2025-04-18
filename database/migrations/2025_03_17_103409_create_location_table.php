@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique()->after('name'); // Add a unique slug column
             $table->string('province');
             $table->string('regency');
             $table->string('distric');

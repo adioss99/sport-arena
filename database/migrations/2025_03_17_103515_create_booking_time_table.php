@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('booking_times', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('booking_field_id')->constrained()->onDelete('cascade');
+            $table->foreignId('schedule_pivot_id')->constrained()->onDelete('cascade')->after('booking_field_id');
             $table->timestamps();
         });
     }

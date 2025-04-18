@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->integer('field_id');
-            $table->string('location_name')->after('booking_code'); 
-        });
-        Schema::table('booking_times', function (Blueprint $table) {
-            $table->foreignId('booking_field_id')->constrained()->onDelete('cascade');
-            $table->foreignId('schedule_pivot_id')->constrained()->onDelete('cascade')->after('booking_field_id');
-        });
+        // Schema::table('bookings', function (Blueprint $table) {
+        //     $table->integer('location_id')->constrained()->onDelete('cascade');
+        //     $table->string('location_name')->after('booking_code'); 
+        // });
+        // Schema::table('booking_times', function (Blueprint $table) {
+        //     $table->foreignId('booking_field_id')->constrained()->onDelete('cascade');
+        //     $table->foreignId('schedule_pivot_id')->constrained()->onDelete('cascade')->after('booking_field_id');
+        // });
     }
 
     /**

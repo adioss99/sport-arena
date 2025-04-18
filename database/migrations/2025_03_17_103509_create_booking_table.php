@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('total_price');
             $table->string('status');
             $table->string('booking_code');
-            $table->integer('user_id');
-            $table->integer('field_id');
+            $table->string('location_name')->after('booking_code');
+            $table->integer('location_id')->constrained()->onDelete('cascade');
+            $table->integer('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

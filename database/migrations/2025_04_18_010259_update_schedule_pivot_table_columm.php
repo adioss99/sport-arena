@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('schedule_pivots', function (Blueprint $table) {
-            $table->boolean('is_active')->default(true);
-        });
+        // Schema::table('schedule_pivots', function (Blueprint $table) {
+        //     $table->boolean('is_active')->default(true);
+        // });
     }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::table('schedule_pivots', function (Blueprint $table) {
-            $table->dropColumn('is_active')->default(false);
-        });
+    { 
+        
     }
 };

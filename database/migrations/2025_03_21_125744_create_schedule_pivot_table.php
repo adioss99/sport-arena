@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('field_id');
             $table->integer('schedule_id');
+            $table->boolean('is_active')->default(true);
         });
     }
 
