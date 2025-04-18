@@ -26,8 +26,8 @@ class HomeController extends Controller
                 $q->whereHas('pivot');
             },
             'fields:id,name,number,location_id,field_type_id',
-            'fields.fieldType:id,detail,price_per_hour',
-            'fields.pivot:id,schedule_id,field_id',
+            'fields.fieldType:id,detail,price_per_hour', 
+            'fields.pivot'  => fn($q) => $q->where('is_active', true),
             'fields.pivot.schedule:id,start_time,end_time',
         ])
             ->where('slug', $slug)
