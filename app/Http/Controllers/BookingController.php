@@ -24,6 +24,7 @@ class BookingController extends Controller
         ])
             ->where('location_id',  $locationId)
             ->whereDate('boking_date', $date)
+            ->where('status', '!=', 'cancel')
             ->select('id',  'location_id')
             ->get()
             ->flatMap(function ($booking) {
@@ -170,7 +171,7 @@ class BookingController extends Controller
             return back()->with('dt', $date);
         } catch (\Exception $e) {
             DB::rollBack();
-            Alert::error('Booking failed!', 'An error occurred while processing your booking. Please try again.' . $e->getMessage());
+            Alert::error('Booking failed!', 'An error occurred while processing your booking. Please try again.');
             return back();
         }
     }
