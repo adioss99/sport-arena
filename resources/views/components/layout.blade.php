@@ -43,7 +43,7 @@
         />
 
         <!-- Styles / Scripts -->
-        @if(!Str::startsWith(request()->path(), 'admin/booking'))
+        @if(!Str::contains(request()->path(), 'booking'))
         <script
             defer
             src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -52,6 +52,8 @@
     </head>
     <body class="h-full">
         {{ $slot }}
+        <!-- Scripts -->
+        @yield('scripts')
         @include('sweetalert::alert') @vite('resources/js/app.js')
     </body>
 </html>

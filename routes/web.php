@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardSuperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserBookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
@@ -62,5 +63,8 @@ Route::prefix('admin')->middleware(['auth:admin'])->name('admin.')->group(functi
 Route::prefix('')->middleware(['auth:user'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'page')->name('dashboard');
+    });
+    Route::controller(UserBookingController::class)->group(function () {
+        Route::get('/booking', 'index')->name('booking'); 
     });
 });

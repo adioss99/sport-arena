@@ -80,6 +80,12 @@ class BookingController extends Controller
 
     public function booking(Request $request)
     {
+        $auth = Auth::user();
+        if ($auth->role->name != 'user' || $auth->location->id != $request->location_id) {
+            Alert::error('Booking Failed', 'You are not allowed to book this location.');
+            return back();
+        }
+
         // Validate the request data
         $val = $this->bookInputValidation($request);
 
@@ -165,9 +171,12 @@ class BookingController extends Controller
                 }
                 $index++;
             }
-
             DB::commit();
+            
             Alert::success('Booking successful!', 'Your booking has been successfully created.');
+            if ($auth->role->name == 'user') {
+                return redirect()->route('booking');
+            }
             return back()->with('dt', $date);
         } catch (\Exception $e) {
             DB::rollBack();
