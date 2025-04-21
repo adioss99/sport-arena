@@ -65,6 +65,8 @@ Route::prefix('')->middleware(['auth:user'])->group(function () {
         Route::get('/dashboard', 'page')->name('dashboard');
     });
     Route::controller(UserBookingController::class)->group(function () {
-        Route::get('/booking', 'index')->name('booking'); 
+        Route::get('/booking', 'index')->name('booking');
+        Route::get('/payment/{bookingcode}', 'payIndex')->name('payment');
+        Route::get('/payment/success/{bookingcode}', 'paymentSuccess')->name('payment.success');
     });
 });

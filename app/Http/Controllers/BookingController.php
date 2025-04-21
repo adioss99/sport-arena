@@ -81,9 +81,12 @@ class BookingController extends Controller
     public function booking(Request $request)
     {
         $auth = Auth::user();
-        if ($auth->role->name != 'user' || $auth->location->id != $request->location_id) {
-            Alert::error('Booking Failed', 'You are not allowed to book this location.');
-            return back();
+        if ($auth->role->name != 'user') {
+            if ($auth->location->id != $request->location_id) {
+                # code...
+                Alert::error('Booking Failed', 'You are not allowed to book this location.');
+                return back();
+            }
         }
 
         // Validate the request data
@@ -103,7 +106,9 @@ class BookingController extends Controller
 
         $locationDB = Location::where('id', $locationId)->select('name', 'id', 'slug')->first();
         $slugCode = $locationDB->slug;
-        $bookingCode =  strtoupper(implode('', array_map(fn($word) => $word[0], explode('-', $slugCode)))) . '' . date('ymdhis');
+        $bookingCode =  strtoupper(
+            implode('', array_map(fn($word) => $word[0], explode('-', $slugCode)))
+        ) . '' . date('ymdhi').''. $auth->id;
         if (!$locationDB) {
             Alert::error('Booking Failed', 'Location not found.');
             return back();
@@ -117,7 +122,7 @@ class BookingController extends Controller
                 ->where('id', $item['field']['fieldId'])
                 ->select('id', 'name', 'field_type_id')
                 ->firstOrFail();
-                
+
             if (!$fieldDB) {
                 Alert::error('Booking Failed', 'Field not found.');
                 return back();
@@ -125,8 +130,8 @@ class BookingController extends Controller
 
             $fields[] = $fieldDB->toArray();
             $fieldPrice = $fieldDB->fieldType->price_per_hour;
-            foreach ($item['time'] as $time) { 
-                $boked = ( isset($availability[(int)$time['timeId']]));
+            foreach ($item['time'] as $time) {
+                $boked = (isset($availability[(int)$time['timeId']]));
                 if ($boked) {
                     Alert::error('Booking Failed', 'Field already booked.');
                     return back();
@@ -148,7 +153,7 @@ class BookingController extends Controller
                 'status' => 'pending',
                 'user_id' => Auth::user()->id,
             ]);
-            
+
             $index = 0;
             foreach ($request->fields as $jsonItem) {
                 $item = json_decode($jsonItem, true);
@@ -172,7 +177,7 @@ class BookingController extends Controller
                 $index++;
             }
             DB::commit();
-            
+
             Alert::success('Booking successful!', 'Your booking has been successfully created.');
             if ($auth->role->name == 'user') {
                 return redirect()->route('booking');
@@ -184,5 +189,4 @@ class BookingController extends Controller
             return back();
         }
     }
-    
 }

@@ -88,7 +88,14 @@ final class AdminBookingTable extends PowerGridComponent
             ->add('boking_date_formatted', fn(Booking $model) => Carbon::parse($model->boking_date)->format('d/m/Y'))
             ->add('total_hours')
             ->add('total_price', fn($book) => Blade::render("@currency($book->total_price)"))
-            ->add('status')
+            ->add('status_formatted', function ($book) {
+                if ($book->status == 'pending') {
+                    return Blade::render("<span class='text-yellow-500 bg-yellow-50'>{$book->status}</span>");
+                } elseif ($book->status == 'success') {
+                    return Blade::render("<span class='text-green-500 bg-green-50'>{$book->status}</span>");
+                }
+                return Blade::render("<span class='text-red-500 bg-red-50'>{$book->status}</span>");
+            })
             ->add('user_name')
             ->add('booking_code')
             ->add('created_at_formatted', fn(Booking $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i'))
@@ -121,7 +128,7 @@ final class AdminBookingTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Status', 'status')
+            Column::make('Status', 'status_formatted', 'status')
                 ->sortable()
                 ->searchable(),
 
@@ -174,7 +181,7 @@ final class AdminBookingTable extends PowerGridComponent
             'status' => 'required|in:success,cancel,pending',
         ]);
         $data = Booking::where('id', $id)->first();
-        if($data && $data->status !== $status && $val->passes() && $this->status !== 'expired' && $data->status !== 'cancel') {
+        if ($data && $data->status !== $status && $val->passes() && $this->status !== 'expired' && $data->status !== 'cancel') {
             $data->update(['status' => $status]);
         }
     }
@@ -184,7 +191,7 @@ final class AdminBookingTable extends PowerGridComponent
 
         return [
             Rule::button('pending')
-                ->when(fn($row) => $row-> status === 'cancel' || $row->status == 'pending' || $this->status == 'expired')
+                ->when(fn($row) => $row->status === 'cancel' || $row->status == 'pending' || $this->status == 'expired')
                 ->hide(),
 
             Rule::button('cancel')
@@ -192,7 +199,7 @@ final class AdminBookingTable extends PowerGridComponent
                 ->hide(),
 
             Rule::button('success')
-                ->when(fn($row) => $row-> status === 'cancel' || $row->status == 'success' || $this->status == 'expired')
+                ->when(fn($row) => $row->status === 'cancel' || $row->status == 'success' || $this->status == 'expired')
                 ->hide(),
         ];
     }
