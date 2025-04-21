@@ -53,7 +53,7 @@
     <body class="h-full">
         {{ $slot }}
         <!-- Scripts -->
-        @yield('scripts')
-        @include('sweetalert::alert') @vite('resources/js/app.js')
+        @stack('scripts') @include('sweetalert::alert')
+        @vite('resources/js/app.js')
     </body>
 </html>

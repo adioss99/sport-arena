@@ -34,6 +34,7 @@ class aside extends Component
             ],
             'user' => [
                 ['name' => 'User', 'icon' => 'fa-chart-line', 'url' => 'dashboard'],
+                ['name' => 'Booking', 'icon' => 'fa-server', 'url' => 'booking'],
             ],
         ];
 
