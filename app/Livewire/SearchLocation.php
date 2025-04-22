@@ -10,7 +10,7 @@ class SearchLocation extends Component
 {
 
     public $center;
-    public $search = 'jember';
+    public $search;
     public function render()
     {
         $loc = ($this->search !== '') ? Location::where('regency', 'like', '%' . $this->search . '%')->get() : [];

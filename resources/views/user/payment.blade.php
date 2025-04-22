@@ -55,6 +55,18 @@
                 window.location.href =
                     " {{ route( 'payment.success',$booking->booking_code) }}";
             },
+            onError: function (result) {
+                /* You may add your own js here, this is just example */
+                alert(
+                    "Payment failed. Please try again or contact support."
+                );
+            },
+            onPending: function (result) {
+                /* You may add your own js here, this is just example */
+                alert(
+                    "Waiting for your payment. Please check your email for payment confirmation."
+                );
+            },
         });
     };
 </script>
